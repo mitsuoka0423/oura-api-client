@@ -1,8 +1,10 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  * Oura API
- * # Overview   The Oura API allows Oura users and partner applications to improve their user experience with Oura data.  This document describes the Oura API Version 2 (V2), which supports access to the latest Oura Ring data types.  For access to other data types—which have not yet migrated to V2—refer to the [Oura API Version 1 (V1)](https://cloud.ouraring.com/docs/) documentation.  # Data Access  Individual Oura users can access their own data through the API by using a [Personal Access Token](https://cloud.ouraring.com/personal-access-tokens).  If you want to retrieve data for multiple users, a registered [API Application](https://cloud.ouraring.com/oauth/applications) is required.  API Applications are limited to **10** users before requiring approval from Oura. There is no limit once an application is approved.  Additionally, Oura users **must provide consent** to share each data type an API Application has access to.  All data access requests through the Oura API require [Authentication](https://cloud.ouraring.com/docs/authentication).  Additionally, we recommend that Oura users keep their mobile app updated to support API access for the latest data types.  The Oura API V2 returns a 426 response code for users who do not have an updated version of the app installed.  # Authentication  The Oura API provides two methods for Authentication: (1) the OAuth2 protocol and (2) Personal Access Tokens. For more information on the OAuth2 flow, see our [Authentication instructions](https://cloud.ouraring.com/docs/authentication).  Access tokens must be included in the request header as follows: ```http GET /v2/usercollection/personal_info HTTP/1.1 Host: api.ouraring.com Authorization: Bearer <token> ```  # Oura HTTP Response Codes  | Response Code                        | Description | | ------------------------------------ | - | | 200 OK                               | Successful Response         | | 400 Query Parameter Validation Error | The request contains query parameters that are invalid or incorrectly formatted. | | 426 Minimum App Version Error        | The Oura user's mobile app does not meet the minimum app version requirement to support sharing the requested data type. The Oura user must update their mobile app to enable API access for the requested data type. | | 429 Request Rate Limit Exceeded        | The API is rate limited to 5000 requests in a 5 minute period. You will receive a 429 error code if you exceed this limit. [Contact us](mailto:api-support@ouraring.com) if you expect your usage to exceed this limit.| 
+ * # Overview   The Oura API allows Oura users and partner applications to improve their user experience with Oura data.  This document describes the Oura API Version 2 (V2), which supports access to the latest Oura Ring data types.  For access to other data types—which have not yet migrated to V2—refer to the [Oura API Version 1 (V1)](https://cloud.ouraring.com/docs/) documentation.  # Data Access  Individual Oura users can access their own data through the API by using a [Personal Access Token](https://cloud.ouraring.com/personal-access-tokens).  If you want to retrieve data for multiple users, a registered [API Application](https://cloud.ouraring.com/oauth/applications) is required.  API Applications are limited to **10** users before requiring approval from Oura. There is no limit once an application is approved.  Additionally, Oura users **must provide consent** to share each data type an API Application has access to.  All data access requests through the Oura API require [Authentication](https://cloud.ouraring.com/docs/authentication).  Additionally, we recommend that Oura users keep their mobile app updated to support API access for the latest data types.  The Oura API V2 returns a 426 response code for users who do not have an updated version of the app installed.  # Authentication  The Oura API provides two methods for Authentication: (1) the OAuth2 protocol and (2) Personal Access Tokens. For more information on the OAuth2 flow, see our [Authentication instructions](https://cloud.ouraring.com/docs/authentication).  Access tokens must be included in the request header as follows: ```http GET /v2/usercollection/personal_info HTTP/1.1 Host: api.ouraring.com Authorization: Bearer <token> ```  # Oura HTTP Response Codes  | Response Code                        | Description | | ------------------------------------ | - | | 200 OK                               | Successful Response         | | 400 Query Parameter Validation Error | The request contains query parameters that are invalid or incorrectly formatted. | | 426 Minimum App Version Error        | The Oura user\'s mobile app does not meet the minimum app version requirement to support sharing the requested data type. The Oura user must update their mobile app to enable API access for the requested data type. | | 429 Request Rate Limit Exceeded        | The API is rate limited to 5000 requests in a 5 minute period. You will receive a 429 error code if you exceed this limit. [Contact us](mailto:api-support@ouraring.com) if you expect your usage to exceed this limit.| 
  *
- * OpenAPI spec version: 2.0
+ * The version of the OpenAPI document: 2.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -10,69 +12,86 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
+import { exists, mapValues } from '../runtime';
+/**
+ * 
+ * @export
+ * @interface PersonalInfoResponse
+ */
+export interface PersonalInfoResponse {
+    /**
+     * The user's age. This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
+     * @type {number}
+     * @memberof PersonalInfoResponse
+     */
+    age?: number;
+    /**
+     * The user's weight (in kilograms). This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
+     * @type {number}
+     * @memberof PersonalInfoResponse
+     */
+    weight?: number;
+    /**
+     * The user's height (in meters). This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
+     * @type {number}
+     * @memberof PersonalInfoResponse
+     */
+    height?: number;
+    /**
+     * The user's biological sex. This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
+     * @type {string}
+     * @memberof PersonalInfoResponse
+     */
+    biologicalSex?: string;
+    /**
+     * The user's e-mail. This field is only present if the user consented to the email access scope. Otherwise, this field will be ```null```.
+     * @type {string}
+     * @memberof PersonalInfoResponse
+     */
+    email?: string;
+}
 
-export class PersonalInfoResponse {
-    /**
-    * The user's age. This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
-    */
-    'age'?: number;
-    /**
-    * The user's weight (in kilograms). This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
-    */
-    'weight'?: number;
-    /**
-    * The user's height (in meters). This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
-    */
-    'height'?: number;
-    /**
-    * The user's biological sex. This field is only present if the user consented to the personal access scope. Otherwise, this field will be ```null```.
-    */
-    'biologicalSex'?: string;
-    /**
-    * The user's e-mail. This field is only present if the user consented to the email access scope. Otherwise, this field will be ```null```.
-    */
-    'email'?: string;
+/**
+ * Check if a given object implements the PersonalInfoResponse interface.
+ */
+export function instanceOfPersonalInfoResponse(value: object): boolean {
+    let isInstance = true;
 
-    static readonly discriminator: string | undefined = undefined;
+    return isInstance;
+}
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "age",
-            "baseName": "age",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "weight",
-            "baseName": "weight",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "height",
-            "baseName": "height",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "biologicalSex",
-            "baseName": "biological_sex",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        }    ];
+export function PersonalInfoResponseFromJSON(json: any): PersonalInfoResponse {
+    return PersonalInfoResponseFromJSONTyped(json, false);
+}
 
-    static getAttributeTypeMap() {
-        return PersonalInfoResponse.attributeTypeMap;
+export function PersonalInfoResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PersonalInfoResponse {
+    if ((json === undefined) || (json === null)) {
+        return json;
     }
+    return {
+        
+        'age': !exists(json, 'age') ? undefined : json['age'],
+        'weight': !exists(json, 'weight') ? undefined : json['weight'],
+        'height': !exists(json, 'height') ? undefined : json['height'],
+        'biologicalSex': !exists(json, 'biological_sex') ? undefined : json['biological_sex'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
+    };
+}
 
-    public constructor() {
+export function PersonalInfoResponseToJSON(value?: PersonalInfoResponse | null): any {
+    if (value === undefined) {
+        return undefined;
     }
+    if (value === null) {
+        return null;
+    }
+    return {
+        
+        'age': value.age,
+        'weight': value.weight,
+        'height': value.height,
+        'biological_sex': value.biologicalSex,
+        'email': value.email,
+    };
 }
 

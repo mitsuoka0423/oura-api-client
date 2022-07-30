@@ -1,8 +1,10 @@
+/* tslint:disable */
+/* eslint-disable */
 /**
  * Oura API
- * # Overview   The Oura API allows Oura users and partner applications to improve their user experience with Oura data.  This document describes the Oura API Version 2 (V2), which supports access to the latest Oura Ring data types.  For access to other data types—which have not yet migrated to V2—refer to the [Oura API Version 1 (V1)](https://cloud.ouraring.com/docs/) documentation.  # Data Access  Individual Oura users can access their own data through the API by using a [Personal Access Token](https://cloud.ouraring.com/personal-access-tokens).  If you want to retrieve data for multiple users, a registered [API Application](https://cloud.ouraring.com/oauth/applications) is required.  API Applications are limited to **10** users before requiring approval from Oura. There is no limit once an application is approved.  Additionally, Oura users **must provide consent** to share each data type an API Application has access to.  All data access requests through the Oura API require [Authentication](https://cloud.ouraring.com/docs/authentication).  Additionally, we recommend that Oura users keep their mobile app updated to support API access for the latest data types.  The Oura API V2 returns a 426 response code for users who do not have an updated version of the app installed.  # Authentication  The Oura API provides two methods for Authentication: (1) the OAuth2 protocol and (2) Personal Access Tokens. For more information on the OAuth2 flow, see our [Authentication instructions](https://cloud.ouraring.com/docs/authentication).  Access tokens must be included in the request header as follows: ```http GET /v2/usercollection/personal_info HTTP/1.1 Host: api.ouraring.com Authorization: Bearer <token> ```  # Oura HTTP Response Codes  | Response Code                        | Description | | ------------------------------------ | - | | 200 OK                               | Successful Response         | | 400 Query Parameter Validation Error | The request contains query parameters that are invalid or incorrectly formatted. | | 426 Minimum App Version Error        | The Oura user's mobile app does not meet the minimum app version requirement to support sharing the requested data type. The Oura user must update their mobile app to enable API access for the requested data type. | | 429 Request Rate Limit Exceeded        | The API is rate limited to 5000 requests in a 5 minute period. You will receive a 429 error code if you exceed this limit. [Contact us](mailto:api-support@ouraring.com) if you expect your usage to exceed this limit.| 
+ * # Overview   The Oura API allows Oura users and partner applications to improve their user experience with Oura data.  This document describes the Oura API Version 2 (V2), which supports access to the latest Oura Ring data types.  For access to other data types—which have not yet migrated to V2—refer to the [Oura API Version 1 (V1)](https://cloud.ouraring.com/docs/) documentation.  # Data Access  Individual Oura users can access their own data through the API by using a [Personal Access Token](https://cloud.ouraring.com/personal-access-tokens).  If you want to retrieve data for multiple users, a registered [API Application](https://cloud.ouraring.com/oauth/applications) is required.  API Applications are limited to **10** users before requiring approval from Oura. There is no limit once an application is approved.  Additionally, Oura users **must provide consent** to share each data type an API Application has access to.  All data access requests through the Oura API require [Authentication](https://cloud.ouraring.com/docs/authentication).  Additionally, we recommend that Oura users keep their mobile app updated to support API access for the latest data types.  The Oura API V2 returns a 426 response code for users who do not have an updated version of the app installed.  # Authentication  The Oura API provides two methods for Authentication: (1) the OAuth2 protocol and (2) Personal Access Tokens. For more information on the OAuth2 flow, see our [Authentication instructions](https://cloud.ouraring.com/docs/authentication).  Access tokens must be included in the request header as follows: ```http GET /v2/usercollection/personal_info HTTP/1.1 Host: api.ouraring.com Authorization: Bearer <token> ```  # Oura HTTP Response Codes  | Response Code                        | Description | | ------------------------------------ | - | | 200 OK                               | Successful Response         | | 400 Query Parameter Validation Error | The request contains query parameters that are invalid or incorrectly formatted. | | 426 Minimum App Version Error        | The Oura user\'s mobile app does not meet the minimum app version requirement to support sharing the requested data type. The Oura user must update their mobile app to enable API access for the requested data type. | | 429 Request Rate Limit Exceeded        | The API is rate limited to 5000 requests in a 5 minute period. You will receive a 429 error code if you exceed this limit. [Contact us](mailto:api-support@ouraring.com) if you expect your usage to exceed this limit.| 
  *
- * OpenAPI spec version: 2.0
+ * The version of the OpenAPI document: 2.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -10,109 +12,131 @@
  * Do not edit the class manually.
  */
 
-import { HttpFile } from '../http/http';
+import { exists, mapValues } from '../runtime';
+/**
+ * 
+ * @export
+ * @interface WorkoutModel
+ */
+export interface WorkoutModel {
+    /**
+     * The workout activity type
+     * @type {string}
+     * @memberof WorkoutModel
+     */
+    activity: string;
+    /**
+     * The number of calories (kcal) burned during the workout
+     * @type {number}
+     * @memberof WorkoutModel
+     */
+    calories?: number;
+    /**
+     * The ```YYYY-MM-DD``` formatted local date indicating when the workout was recorded
+     * @type {Date}
+     * @memberof WorkoutModel
+     */
+    day: Date;
+    /**
+     * The distance (measured in meters) traveled during the workout
+     * @type {number}
+     * @memberof WorkoutModel
+     */
+    distance?: number;
+    /**
+     * ISO 8601 formatted local timestamp indicating when the workout ended
+     * @type {string}
+     * @memberof WorkoutModel
+     */
+    endDatetime: string;
+    /**
+     * The workout intensity:
+     * * ```easy```
+     * * ```moderate```
+     * * ```hard```
+     * @type {string}
+     * @memberof WorkoutModel
+     */
+    intensity: string;
+    /**
+     * User-defined label for the workout
+     * @type {string}
+     * @memberof WorkoutModel
+     */
+    label?: string;
+    /**
+     * The data source where the Workout data was collected from:
+     * * ```manual``` Workouts which were manually entered by the user
+     * * ```autodetected``` Workouts autodetected by Oura
+     * * ```confirmed``` Workouts autodetected by Oura and confirmed by the user
+     * * ```workout_heart_rate``` Workouts recorded with the Workout HR feature
+     * @type {string}
+     * @memberof WorkoutModel
+     */
+    source: string;
+    /**
+     * ISO 8601 formatted local timestamp indicating when the workout started
+     * @type {string}
+     * @memberof WorkoutModel
+     */
+    startDatetime: string;
+}
 
-export class WorkoutModel {
-    /**
-    * The workout activity type
-    */
-    'activity': string;
-    /**
-    * The number of calories (kcal) burned during the workout
-    */
-    'calories'?: number;
-    /**
-    * The ```YYYY-MM-DD``` formatted local date indicating when the workout was recorded
-    */
-    'day': string;
-    /**
-    * The distance (measured in meters) traveled during the workout
-    */
-    'distance'?: number;
-    /**
-    * ISO 8601 formatted local timestamp indicating when the workout ended
-    */
-    'endDatetime': string;
-    /**
-    * The workout intensity: * ```easy``` * ```moderate``` * ```hard```
-    */
-    'intensity': string;
-    /**
-    * User-defined label for the workout
-    */
-    'label'?: string;
-    /**
-    * The data source where the Workout data was collected from: * ```manual``` Workouts which were manually entered by the user * ```autodetected``` Workouts autodetected by Oura * ```confirmed``` Workouts autodetected by Oura and confirmed by the user * ```workout_heart_rate``` Workouts recorded with the Workout HR feature
-    */
-    'source': string;
-    /**
-    * ISO 8601 formatted local timestamp indicating when the workout started
-    */
-    'startDatetime': string;
+/**
+ * Check if a given object implements the WorkoutModel interface.
+ */
+export function instanceOfWorkoutModel(value: object): boolean {
+    let isInstance = true;
+    isInstance = isInstance && "activity" in value;
+    isInstance = isInstance && "day" in value;
+    isInstance = isInstance && "endDatetime" in value;
+    isInstance = isInstance && "intensity" in value;
+    isInstance = isInstance && "source" in value;
+    isInstance = isInstance && "startDatetime" in value;
 
-    static readonly discriminator: string | undefined = undefined;
+    return isInstance;
+}
 
-    static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "activity",
-            "baseName": "activity",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "calories",
-            "baseName": "calories",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "day",
-            "baseName": "day",
-            "type": "string",
-            "format": "date"
-        },
-        {
-            "name": "distance",
-            "baseName": "distance",
-            "type": "number",
-            "format": ""
-        },
-        {
-            "name": "endDatetime",
-            "baseName": "end_datetime",
-            "type": "string",
-            "format": "datetime"
-        },
-        {
-            "name": "intensity",
-            "baseName": "intensity",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "label",
-            "baseName": "label",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "source",
-            "baseName": "source",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "startDatetime",
-            "baseName": "start_datetime",
-            "type": "string",
-            "format": "datetime"
-        }    ];
+export function WorkoutModelFromJSON(json: any): WorkoutModel {
+    return WorkoutModelFromJSONTyped(json, false);
+}
 
-    static getAttributeTypeMap() {
-        return WorkoutModel.attributeTypeMap;
+export function WorkoutModelFromJSONTyped(json: any, ignoreDiscriminator: boolean): WorkoutModel {
+    if ((json === undefined) || (json === null)) {
+        return json;
     }
+    return {
+        
+        'activity': json['activity'],
+        'calories': !exists(json, 'calories') ? undefined : json['calories'],
+        'day': (new Date(json['day'])),
+        'distance': !exists(json, 'distance') ? undefined : json['distance'],
+        'endDatetime': json['end_datetime'],
+        'intensity': json['intensity'],
+        'label': !exists(json, 'label') ? undefined : json['label'],
+        'source': json['source'],
+        'startDatetime': json['start_datetime'],
+    };
+}
 
-    public constructor() {
+export function WorkoutModelToJSON(value?: WorkoutModel | null): any {
+    if (value === undefined) {
+        return undefined;
     }
+    if (value === null) {
+        return null;
+    }
+    return {
+        
+        'activity': value.activity,
+        'calories': value.calories,
+        'day': (value.day.toISOString().substr(0,10)),
+        'distance': value.distance,
+        'end_datetime': value.endDatetime,
+        'intensity': value.intensity,
+        'label': value.label,
+        'source': value.source,
+        'start_datetime': value.startDatetime,
+    };
 }
 
